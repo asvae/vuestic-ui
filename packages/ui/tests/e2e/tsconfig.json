@@ -1,0 +1,13 @@
+// Taken/recommended from official docs: https://docs.cypress.io/guides/tooling/typescript-support.html#Configure-tsconfig-json
+{
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "../node_modules",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress"]
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}
