@@ -1,19 +1,14 @@
-/**
- * Documents page Generator
- */
-
 /* eslint strict: ["off"] */
 
 'use strict'
 
 module.exports = {
-  description: 'Add a documentation page',
+  description: 'Generate boilerplate for component. Includes: component file, specs, demo, documentation page.',
   prompts: [
     {
       type: 'input',
       name: 'name',
-      message: 'What should it be called?',
-      default: 'test',
+      message: 'What\'s the component name (ex.: fileUpload)?',
       validate: value => {
         if (/.+/.test(value)) {
           return true
@@ -34,7 +29,7 @@ module.exports = {
 
     actions.push({
       type: 'gitCheck',
-      abortOnFail: true,
+      abortOnFail: false,
     })
 
     // Generate docs

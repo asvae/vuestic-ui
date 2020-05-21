@@ -23,7 +23,7 @@
     "generate:docs": "yarn workspace @vuestic-ui/docs generate",
     "push": "yarn workspace vuestic-ui push",
     "push-production": "yarn workspace vuestic-ui ush-production",
-    "generate": "plop --plopfile scripts/generators/index.js"
+    "generate:component": "plop --plopfile scripts/generators/index.js"
   },
   "workspaces": [
     "packages/*"
