@@ -123,6 +123,7 @@ export default {
     VaBadge,
   },
   beforeCreate () {
+    // We do not remove global config becuase it bugs with navigation. :/
     setGlobalConfig(config => ({
       ...config,
       VaTest: {

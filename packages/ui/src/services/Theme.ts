@@ -1,10 +1,25 @@
 import { setGlobalConfig, getGlobalConfig } from './GlobalConfigPlugin'
+import Vue from 'vue'
+import { Ref } from '@vuestic-ui/docs/types/configTypes'
+
+export type HexColor = string
+export type ThemeConfig = {
+  primary: HexColor;
+  secondary: HexColor;
+  success: HexColor;
+  info: HexColor;
+  danger: HexColor;
+  warning: HexColor;
+  gray: HexColor;
+  dark: HexColor;
+  [key: string]: HexColor;
+}
 
 // Most default color - fallback when nothing else is found.
 export const DEFAULT_COLOR = '#000000'
 
 // This object is intended to be mutable, so that other services can observe it.
-export const DEFAULT_THEME = {
+const DEFAULT_THEME = {
   primary: '#23e066',
   secondary: '#002c85',
   success: '#40e583',
@@ -15,6 +30,8 @@ export const DEFAULT_THEME = {
   dark: '#34495e',
 }
 
+export const getDefaultTheme = () => ({ ...DEFAULT_THEME })
+
 export const setTheme = (theme: Record<string, string>): void => {
   setGlobalConfig(config => ({
     ...config,
@@ -24,4 +41,23 @@ export const setTheme = (theme: Record<string, string>): void => {
 
 export const getTheme = (): Record<string, string> | undefined => {
   return getGlobalConfig().theme
+}
+
+// Does modifications of themes.
+// Note that themes are mutable.
+export class ThemeConfigService {
+  public ref: Ref<ThemeConfig>
+
+  constructor () {
+    this.ref = Vue.observable({ value: getDefaultTheme() })
+  }
+
+  setTheme (config: ThemeConfig | ((config: ThemeConfig) => ThemeConfig)): void {
+    const configObject = typeof config === 'function' ? config() : config
+    this.ref.value = { ...configObject }
+  }
+
+  getTheme (): ThemeConfig {
+    return this.ref.value
+  }
 }

@@ -7,6 +7,7 @@ import { VueConstructor } from 'vue'
 export type CodeString = string
 // example: for `/examples/va-affix/Bottom.vue` use `va-affix/Bottom.vue` here.
 export type PathToExample = string
+export type Ref<T> = {value: T, }
 
 export enum BlockType {
   TITLE = 'TITLE',

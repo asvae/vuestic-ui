@@ -5,7 +5,7 @@ import BookApp from './BookApp.vue'
 import VueClipboard from 'vue-clipboard2'
 import Router from 'vue-router'
 import { VueBookComponents, createRoute } from 'vue-book'
-import { setTheme, DEFAULT_THEME } from '../services/Theme'
+import { setTheme, getDefaultTheme } from '../services/Theme'
 import { getDefaultConfig } from '../components/vuestic-components/va-config/config-default'
 import GlobalConfigPlugin from '../services/GlobalConfigPlugin'
 import { BusPlugin } from 'vue-epic-bus'
@@ -23,9 +23,11 @@ installPlatform()
 Vue.use(Router)
 Vue.use(VueBookComponents)
 if (!process.env.VUE_APP_DEMO_NO_THEME_PLUGIN) {
-  setTheme(DEFAULT_THEME)
+  setTheme(getDefaultTheme())
 }
 Vue.use(DropdownPopperPlugin)
+
+// TODO Should be included by default!
 Vue.use(GlobalConfigPlugin, getDefaultConfig())
 
 const router = new Router({
